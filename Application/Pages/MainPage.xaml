@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Application.Pages.MainPage"
+             BackgroundImageSource="main_background.png">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, *"
+          ColumnDefinitions=".5*, .2*">
+
+        <Border
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            StrokeShape="RoundRectangle 50"
+            Margin="25"
+            HeightRequest="40">
+            <SearchBar BackgroundColor="White"/>
+        </Border>
+
+        <ListView x:Name="CurrentItemList"
+            SeparatorVisibility="None"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"      
+            VerticalScrollBarVisibility = "Never" 
+            Margin="15, -6, 15, 0"
+            HasUnevenRows="True"
+            SelectionMode="None"
+            ItemTapped="ExhibitionsList_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Border
+                            StrokeShape="RoundRectangle 18"
+                            Margin="10">
+                            <Grid
+                                RowDefinitions="Auto, Auto, Auto"
+                                ColumnDefinitions="*, 30"
+                                BackgroundColor="White"
+                                Padding="15">
+                                <Label 
+                                    Grid.Row="0" 
+                                    Grid.Column="0" 
+                                    Text= "{Binding Name}"
+                                    TextColor="#6a636f"
+                                    FontFamily="Impact"
+                                    FontSize="25"/>
+
+                                <Button 
+                                    Grid.Column="1"
+                                    Background="White"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    ImageSource="selected_star.png"
+                                    Command="{Binding Path=BindingContext.UnselectItemCommand, Source={x:Reference Name=CurrentItemList}}"
+                                    CommandParameter="{Binding .}"/>
+
+                                <Label Grid.Row="1" Grid.ColumnSpan="2"
+                                    FontFamily="Bahnschrift"
+                                    TextColor="#6a636f"
+                                    FontSize="20">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Количество экспонатов - {0}">
+                                            <Binding Path="ExhibitCount" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Grid.Row="2" Grid.ColumnSpan="2"
+                                    FontFamily="Bahnschrift"
+                                    TextColor="#6a636f"
+                                    FontSize="20">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Продолжительность - {0} мин.">
+                                            <Binding Path="Time"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </Grid>
+                        </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Image x:Name="CurrentItemImage" 
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Source="image.png"
+            Scale="0.5"
+               Margin="-60"/>
+
+        <Image 
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Source="image1.png" 
+            Scale="0.9"
+            Margin="5"/>
+        
+
+        <ListView x:Name="ExhibitionsList"
+            SeparatorVisibility="None"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"      
+            VerticalScrollBarVisibility = "Never" 
+            Margin="15, -6, 15, 0"
+            HasUnevenRows="True"
+            SelectionMode="None"
+            ItemTapped="ExhibitionsList_ItemTapped"
+            MaximumHeightRequest="450">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Border
+                        StrokeShape="RoundRectangle 18"
+                        Margin="10">
+                            <Grid
+                                RowDefinitions="Auto, Auto, Auto"
+                                ColumnDefinitions="*, 30"
+                                BackgroundColor="White"
+                                Padding="15">
+                                <Label 
+                                    Grid.Row="0" 
+                                    Grid.Column="0" 
+                                    Text= "{Binding Name}"
+                                    TextColor="#6a636f"
+                                    FontFamily="Impact"
+                                    FontSize="25"/>
+
+                                <Button 
+                                    Grid.Column="1"
+                                    Background="White"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    ImageSource="star.png"
+                                    Command="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference Name=ExhibitionsList}}"
+                                    CommandParameter="{Binding .}"/>
+
+                                <Label Grid.Row="1" Grid.ColumnSpan="2"
+                                    FontFamily="Bahnschrift"
+                                    TextColor="#6a636f"
+                                    FontSize="20">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Количество экспонатов - {0}">
+                                            <Binding Path="ExhibitCount" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Grid.Row="2" Grid.ColumnSpan="2"
+                                    FontFamily="Bahnschrift"
+                                    TextColor="#6a636f"
+                                    FontSize="20">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Продолжительность - {0} мин.">
+                                            <Binding Path="Time"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </Grid>
+                        </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Border
+            Grid.Row="4"
+            Grid.Column="2"
+            StrokeShape="RoundRectangle 75"
+            WidthRequest="60"
+            HeightRequest="60"
+            Margin="20"
+            Padding="-20"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            BackgroundColor="#005a4b">
+            <Button
+                BackgroundColor="#005a4b"
+                ImageSource="plus.png"
+                Scale="0.35"
+                Clicked="onClick"/>
+        </Border>
+    </Grid>
+</ContentPage>

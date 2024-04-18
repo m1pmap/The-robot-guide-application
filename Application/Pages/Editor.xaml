@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Application.Pages.Editor"
+             BackgroundImageSource="main_background.png">
+
+    <Grid 
+        RowDefinitions="Auto, Auto, *, .20*"
+        ColumnDefinitions=".5*, .2*">
+        
+        <Border x:Name="SearchBarBorder"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            StrokeShape="RoundRectangle 50"
+            Margin="25"
+            HeightRequest="40">
+            <SearchBar BackgroundColor="White"/>
+        </Border>
+
+
+        <!--<Label x:Name="Label"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Text="РЕДАКТОР"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start"
+            Margin="25, 20, 0, 0"
+            FontFamily="Impact"
+            TextColor="White"
+            FontSize= "40"/>-->
+
+
+        <!--<CollectionView x:Name="ExhibitionsList"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="20">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=Width}"
+                        Margin="2"
+                        Padding="0"
+                        HasShadow="False"
+                        HeightRequest="120">
+                        <StackLayout 
+                            BackgroundColor="White"
+                            Padding="15">
+                            <Label 
+                                Text= "{Binding Name}"
+                                TextColor="#6a636f"
+                                FontFamily="Impact"
+                                FontSize="25"/>
+                            <Label 
+                                FontFamily="Bahnschrift"
+                                TextColor="#6a636f"
+                                FontSize="20">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="Количество экспонатов - {0}">
+                                        <Binding Path="ExhibitCount" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label
+                                FontFamily="Bahnschrift"
+                                TextColor="#6a636f"
+                                FontSize="20">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="Продолжительность - {0} мин.">
+                                        <Binding Path="Time"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+
+
+        <!--<ListView x:Name="ExhibitionsList"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            SeparatorVisibility="None"
+            VerticalScrollBarVisibility = "Never" 
+            Margin="15, -6, 15, 0"
+            HasUnevenRows="True"
+            SelectionMode="None"
+            ItemTapped="ExhibitionsList_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem 
+                                        BackgroundColor="#c3426b"  
+                                        Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference Name=ExhibitionsList}}" 
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="delete.png">
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border
+                                StrokeShape="RoundRectangle 18 0 18 0"
+                                Margin="10">
+                                <StackLayout 
+                                    BackgroundColor="White"
+                                    Padding="15">
+                                    <Label 
+                                        Text= "{Binding Name}"
+                                        TextColor="#6a636f"
+                                        FontFamily="Impact"
+                                        FontSize="25"/>
+                                    <Label 
+                                        FontFamily="Bahnschrift"
+                                        TextColor="#6a636f"
+                                        FontSize="20">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="Количество экспонатов - {0}">
+                                                <Binding Path="ExhibitCount" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label
+                                        FontFamily="Bahnschrift"
+                                        TextColor="#6a636f"
+                                        FontSize="20">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="Продолжительность - {0} мин.">
+                                                <Binding Path="Time"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </StackLayout>
+                            </Border>
+                        </SwipeView>
+                    </ViewCell>
+                </DataTemplate>    
+            </ListView.ItemTemplate>
+        </ListView>-->
+
+        <!--<Border
+            Grid.Row="3"
+            Grid.Column="2"
+            StrokeShape="RoundRectangle 75"
+            WidthRequest="60"
+            HeightRequest="60"
+            Padding="-70">
+            <Button
+                BackgroundColor="#005a4b"
+                ImageSource="plus.png"
+                Scale="0.35"
+                Clicked="onClick"/>
+        </Border>-->
+
+        
+    </Grid>  
+    
+</ContentPage>

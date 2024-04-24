@@ -5,25 +5,14 @@
              BackgroundImageSource="main_background.png"
              Shell.FlyoutBehavior="Disabled">
     <StackLayout>
-        <Editor x:Name="ExhibitName"
-            IsReadOnly="True"
+        <Label x:Name="ExhibitName"
             TextColor="White"
             HorizontalOptions="Center"
             FontFamily="Impact"
             FontSize="30"
             Margin="10">
-        </Editor>
-
-        <Button
-            CornerRadius="15"
-            Margin="20, 0"
-            BackgroundColor="White"
-            Text="ВЫБРАТЬ ГОЛОС ОЗВУЧКИ"
-            TextColor="#0d4853"
-            FontFamily="Impact"
-            FontSize="21"
-            ImageSource="play.png"
-            ContentLayout="Right, 100"/>
+            
+        </Label>
     </StackLayout>
 
 </ContentPage>

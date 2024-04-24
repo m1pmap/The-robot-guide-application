@@ -2,17 +2,11 @@ using Application.Pages;
 using Application.Models;
 using Application.Patterns.Singleton;
 using System.Windows.Input;
-using Plugin.BLE;
-using System.Text;
-using Plugin.BLE.Abstractions.Contracts;
-using System.Threading.Tasks;
-using Android.Bluetooth;
 
 namespace Application.Pages;
 
 public partial class MainPage : ContentPage
 {
-
     public ICommand SelectItemCommand { get; set; }
     public ICommand UnselectItemCommand { get; set; }
     public MainPage()
@@ -24,7 +18,6 @@ public partial class MainPage : ContentPage
         SelectItemCommand = new Command<Exhibition>(SelectItem);
         UnselectItemCommand = new Command<Exhibition>(UnelectItem);
     }
-
     private void SelectItem(Exhibition exhibition)
     {
         if (ExhibitionManager.Instance.CurrentItem.Count != 0)
@@ -47,25 +40,9 @@ public partial class MainPage : ContentPage
 
     async void onClick(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new ExhibitPage(new Exhibition { Name = "", ExhibitCount = 0, Time = 0 }));
-        var name = await DisplayPromptAsync("Добавление экскурсии", "Введите название:", "OK", "Отмена");
-        ExhibitionManager.Instance.Items.Add(new Exhibition { Name = name, ExhibitCount = 0, Time = 0 });
-
-        //// Инициализация адаптера
-        //var adapter = CrossBluetoothLE.Current.Adapter;
-
-        //// Подключение к устройству
-        //var device = await adapter.ConnectToKnownDeviceAsync(Guid.Parse("00001101-0000-1000-8000-00805F9B34FB"));
-
-        //// Получение сервиса
-        //var service = await device.GetServiceAsync(Guid.Parse("00001101-0000-1000-8000-00805F9B34FB"));
-
-        //// Получение характеристики
-        //var characteristic = await service.GetCharacteristicAsync(Guid.Parse("00001101-0000-1000-8000-00805F9B34FB"));
-
-        //// Передача символа '1'
-        //var bytes = Encoding.UTF8.GetBytes("1");
-        //await characteristic.WriteAsync(bytes);
+        //await Navigation.PushModalAsync(new ExhibitPage(new Exhibition { Name = "", ExhibitCount = 0, Time = 0 }));
+        var name = await DisplayPromptAsync("Логин", "Введите имя:", "OK", "Отмена");
+        ExhibitionManager.Instance.Items.Add(new Exhibition { Name = name, ExhibitCount = 0, Time = 0});
     }
 
     public async void ExhibitionsList_ItemTapped(object sender, ItemTappedEventArgs e)

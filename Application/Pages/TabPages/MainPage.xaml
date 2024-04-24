@@ -12,7 +12,8 @@
             Grid.ColumnSpan="2"
             StrokeShape="RoundRectangle 50"
             Margin="25"
-            HeightRequest="40">
+            HeightRequest="40"
+            StrokeThickness="0">
             <SearchBar BackgroundColor="White"/>
         </Border>
 
@@ -30,7 +31,8 @@
                     <ViewCell>
                         <Border
                             StrokeShape="RoundRectangle 18"
-                            Margin="10">
+                            Margin="10"
+                            StrokeThickness="0">
                             <Grid
                                 RowDefinitions="Auto, Auto, Auto"
                                 ColumnDefinitions="*, 30"
@@ -111,8 +113,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <Border
-                        StrokeShape="RoundRectangle 18"
-                        Margin="10">
+                            StrokeShape="RoundRectangle 18"
+                            Margin="10"
+                            StrokeThickness="0">
                             <Grid
                                 RowDefinitions="Auto, Auto, Auto"
                                 ColumnDefinitions="*, 30"
@@ -174,7 +177,8 @@
             Padding="-20"
             HorizontalOptions="End"
             VerticalOptions="End"
-            BackgroundColor="#005a4b">
+            BackgroundColor="#005a4b"
+            StrokeThickness="0">
             <Button
                 BackgroundColor="#005a4b"
                 ImageSource="plus.png"

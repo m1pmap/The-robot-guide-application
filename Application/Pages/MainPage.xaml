@@ -30,7 +30,8 @@
                     <ViewCell>
                         <Border
                             StrokeShape="RoundRectangle 18"
-                            Margin="10">
+                            Margin="10"
+                            StrokeThickness="0">
                             <Grid
                                 RowDefinitions="Auto, Auto, Auto"
                                 ColumnDefinitions="*, 30"
@@ -106,13 +107,14 @@
             HasUnevenRows="True"
             SelectionMode="None"
             ItemTapped="ExhibitionsList_ItemTapped"
-            MaximumHeightRequest="450">
+            MaximumHeightRequest="490">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Border
                         StrokeShape="RoundRectangle 18"
-                        Margin="10">
+                        Margin="10"
+                        StrokeThickness="0">
                             <Grid
                                 RowDefinitions="Auto, Auto, Auto"
                                 ColumnDefinitions="*, 30"
@@ -174,9 +176,9 @@
             Padding="-20"
             HorizontalOptions="End"
             VerticalOptions="End"
-            BackgroundColor="#005a4b">
+            BackgroundColor="#0f3234">
             <Button
-                BackgroundColor="#005a4b"
+                BackgroundColor="#0f3234"
                 ImageSource="plus.png"
                 Scale="0.35"
                 Clicked="onClick"/>

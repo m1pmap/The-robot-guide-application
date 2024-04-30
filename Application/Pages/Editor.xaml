@@ -38,7 +38,8 @@
             Grid.Column="2"
             BackgroundColor="White"
             ImageSource="joystick.png"
-            CornerRadius="15">
+            CornerRadius="15"
+            Clicked="Controlling_button">
         </Button>
 
         <Button 
@@ -63,7 +64,8 @@
         TextColor="#0d4853"
         FontFamily="Impact"
         FontSize="28"
-        Padding="5"/>
+        Padding="5"
+        Clicked="Connection_button"/>
     </Grid>
 
 </ContentPage>

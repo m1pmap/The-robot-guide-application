@@ -7,39 +7,47 @@ using System.Xml.Linq;
 using Microsoft.Maui.Controls;
 using System.Xml;
 using System.Security.AccessControl;
+using Android.Bluetooth;
+using Java.Util;
+using Application.Pages.SimplePages;
 
 namespace Application.Pages;
 
 public partial class Editor : ContentPage
 {
-    public ICommand DeleteItemCommand {  get; set; }
+    BluetoothSocket _socket;
     public Editor()
 	{
 		InitializeComponent();
         BindingContext = this;
-        //ExhibitionsList.ItemsSource = ExhibitionManager.Instance.Items;
-        DeleteItemCommand = new Command<Exhibition>(DeleteItem);
     }
 
-    async void onClick(object sender, EventArgs e)
+    private async void Connection_button(object sender, EventArgs e)
     {
-        string name = await DisplayPromptAsync("Создание экскурсии", "Введите название:", "OK", "Отмена");
-        if(name.Length > 0) 
+        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (status != PermissionStatus.Granted)
         {
-            ExhibitionManager.Instance.Items.Add(new Exhibition { Name = name, ExhibitCount = 0, Time = 0 });
+            BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
+            if (adapter == null)
+                throw new Exception("No Bluetooth adapter found.");
+
+            if (!adapter.IsEnabled)
+                throw new Exception("Bluetooth adapter is not enabled.");
+
+            BluetoothDevice device = (from bd in adapter.BondedDevices where bd.Name == "HC-05" select bd).FirstOrDefault();
+
+            if (device == null)
+                throw new Exception("Named device not found.");
+
+            _socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
+            await _socket.ConnectAsync();
+
+            //await _socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
         }
     }
 
-    private void DeleteItem(Exhibition exhibition)
+    private async void Controlling_button(object sender, EventArgs e)
     {
-        ExhibitionManager.Instance.Items.Remove(exhibition);
-    }
-
-    public async void ExhibitionsList_ItemTapped(object sender, ItemTappedEventArgs e)
-    {
-        if (e.Item is Exhibition tappedExhibition)
-        {
-            await Navigation.PushAsync(new ExhibitPage(tappedExhibition));
-        }
+        await Navigation.PushModalAsync(new ControllingPage(_socket));
     }
 }

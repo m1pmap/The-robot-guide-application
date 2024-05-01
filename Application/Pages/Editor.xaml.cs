@@ -23,16 +23,13 @@ public partial class Editor : ContentPage
     }
 
     private async void Connection_button(object sender, EventArgs e)
-    {
-        activityIndicator.IsRunning = true;
+    {     
         Connecting();
-        activityIndicator.IsRunning = false;
-        await DisplayAlert("Подключение успешно", "Вы подключены", "ОК");
-
     }
 
     private async void Connecting()
     {
+        activityIndicator.IsRunning = true;
         try
         {
             var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -53,7 +50,8 @@ public partial class Editor : ContentPage
                 _socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
                 await _socket.ConnectAsync();
 
-                //await _socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
+                activityIndicator.IsRunning = false;
+                await DisplayAlert("Подключение успешно", "Вы подключены", "ОК");
             }
         }
         catch (Exception ex)

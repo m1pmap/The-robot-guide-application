@@ -5,9 +5,11 @@
              BackgroundImageSource="main_background.png">
 
     <Grid 
-    RowDefinitions="Auto, Auto, Auto"
+    RowDefinitions="Auto, Auto, Auto, Auto"
     ColumnDefinitions=".3*, .5*">
-
+        <ActivityIndicator Color="White" 
+            Grid.Row="3" Grid.ColumnSpan="2"
+            x:Name="activityIndicator" IsRunning="False" />
         <Border
         Grid.Row="0"
         Grid.ColumnSpan="1"

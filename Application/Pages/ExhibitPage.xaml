@@ -4,15 +4,171 @@
              x:Class="Application.Pages.ExhibitPage"
              BackgroundImageSource="main_background.png"
              Shell.FlyoutBehavior="Disabled">
+
+
     <StackLayout>
         <Label x:Name="ExhibitName"
             TextColor="White"
             HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
             FontFamily="Impact"
-            FontSize="30"
+            FontSize="23"
             Margin="10">
-            
         </Label>
+
+        <Button 
+            Text="ВЫБРАТЬ ГОЛОС"
+            FontFamily="Impact"
+            CornerRadius="15"
+            Margin="20, 0"
+            FontSize="20"
+            TextColor="#0d4853"
+            BackgroundColor="White"/>
+
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions=".5*, .2*">
+            <Border
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                StrokeShape="RoundRectangle 15 15 0 10"
+                Margin="20, 20, 20, 0"
+                Padding="5"
+                StrokeThickness="-2"
+                BackgroundColor="White">
+                <VerticalStackLayout HeightRequest="250">
+                    <ListView x:Name="ExhibitsList"
+                              SeparatorVisibility="None"
+                              VerticalScrollBarVisibility = "Never"
+                              HasUnevenRows="True"
+                              SelectionMode="None"
+                              MaximumHeightRequest="244">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Border
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        StrokeShape="RoundRectangle 10"
+                                        Margin="10"
+                                        StrokeThickness="0"
+                                        BackgroundColor="{Binding Color}">
+                                        <Grid ColumnDefinitions="0.8*, 0.2*">
+                                            <Label 
+                                                VerticalOptions="Center"
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Text= "{Binding Name}"
+                                                TextColor="White"
+                                                FontFamily="Impact"
+                                                FontSize="20"
+                                                Margin="15, 5"/>
+                                            <Image
+                                                Grid.Column="1"
+                                                Scale="1.1"
+                                                Margin="0, 0, 10, -2"
+                                                Source="{Binding Source}"
+                                                >
+                                            </Image>
+                                        </Grid>
+                                    </Border>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                StrokeShape="RoundRectangle 0 0 15 10"
+                Margin="20, 0, 0, 0"
+                StrokeThickness="-2"
+                BackgroundColor="White">
+                <VerticalStackLayout HeightRequest="75">
+                    <Button
+                        Text="В ПУТЬ"
+                        FontFamily="Impact"
+                        FontSize="20"
+                        Margin="15, 12"
+                        Clicked="ShowHideConroller"
+                        Background="#0d4853"/>
+                </VerticalStackLayout>
+            </Border>
+            <Button 
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10, 10, 30, 10"
+                Padding="-10"
+                CornerRadius="-50"
+                Background="#0d4853"
+                BorderColor="White"
+                BorderWidth="3"
+                Text="+"
+                FontFamily="Impact"
+                FontSize="50">
+            </Button>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10, 10, 30, 10"
+                Padding="-10"
+                CornerRadius="-50"
+                Background="#0d4853"
+                BorderColor="White"
+                BorderWidth="3"
+                Text="+"
+                FontFamily="Impact"
+                FontSize="50">
+            </Button>
+        </Grid>
+        <Grid RowDefinitions="Auto, Auto, Auto"
+              ColumnDefinitions=".5*, .5*">
+            <Button x:Name="Forward_button"
+                  IsVisible="false"
+                  Grid.Row="0"
+                  Grid.ColumnSpan="2"
+                  ImageSource="arrow_up_small"
+                  Background="Transparent"
+                  Margin="0, 20, 0, -20"
+                  Scale="1"
+                  />
+                  <!--Pressed="Forward_buttonPressed"
+                  Released="ButtonsReleased"/>-->
+
+            <Button x:Name="Left_button"
+                  IsVisible="false"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="1"
+                  ImageSource="arrow_left_small"
+                  Background="Transparent"
+                  Scale="1"
+                  Margin="25, 0, 0, -20"
+                  />
+                  <!--Pressed="Left_buttonPressed"
+                  Released="ButtonsReleased"/>-->
+            <Button x:Name="Right_button"
+                  IsVisible="false"
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  ImageSource="arrow_right_small"
+                  Background="Transparent"
+                  Scale="1"
+                  Margin="-25, 0, 0, -20"
+                  />
+                  <!--Pressed="Right_buttonPressed"
+                  Released="ButtonsReleased"/>-->
+            <Button x:Name="Back_button"
+                   IsVisible="false"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="2"
+                   ImageSource="arrow_down_small"
+                   Scale="1"
+                   Background="Transparent"
+                   />
+                   <!--Pressed="Back_buttonPressed"
+                   Released="ButtonsReleased"/>-->
+        </Grid>
     </StackLayout>
+
 
 </ContentPage>

@@ -9,36 +9,46 @@ public partial class ControllingPage : ContentPage
     byte[] buffer = new byte[1];
 
     public ControllingPage(BluetoothSocket _socket)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         socket = _socket;
     }
-    private async void Forward_button(object sender, EventArgs e)
+    private void Forward_buttonPressed(object sender, EventArgs e)
     {
         SendData('1', socket);
     }
 
-    private async void Back_button(object sender, EventArgs e)
+    private void Back_buttonPressed(object sender, EventArgs e)
     {
         SendData('2', socket);
     }
 
-    private async void Left_button(object sender, EventArgs e)
+    private void Left_buttonPressed(object sender, EventArgs e)
     {
         SendData('3', socket);
     }
 
-    private async void Right_button(object sender, EventArgs e)
+    private void Right_buttonPressed(object sender, EventArgs e)
     {
-        
         SendData('4', socket);
+    }
+
+    private void ButtonsReleased(object sender, EventArgs e)
+    {
+        SendData('5', socket);
     }
 
 
     private async void SendData(char data, BluetoothSocket socket)
     {
-        buffer[0] = (byte)data;
-        await socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+        try
+        {
+            buffer[0] = (byte)data;
+            await socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+        }
+        catch
+        {
+            await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
+        }
     }
-
 }

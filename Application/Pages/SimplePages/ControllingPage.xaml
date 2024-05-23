@@ -22,7 +22,9 @@
         Background="Transparent"
         Margin="0, 0, 0, -20"
         Scale="0.9"
-        Clicked="Forward_button"/>
+        Clicked="Forward_buttonPressed"/>
+        <!--Pressed="Forward_buttonPressed"
+        Released="ButtonsReleased"/>-->
 
         <Button 
         Grid.Row="2"
@@ -31,7 +33,9 @@
         Background="Transparent"
         Scale="0.9"
         Margin="0, 0, 0, -20"
-        Clicked="Left_button"/>
+        Clicked="Left_buttonPressed"/>
+        <!--Pressed="Left_buttonPressed"
+        Released="ButtonsReleased"/>-->
 
         <Button 
         Grid.Row="2"
@@ -40,7 +44,9 @@
         Background="Transparent"
         Scale="0.9"
         Margin="0, 0, 0, -20"
-        Clicked="Right_button"/>
+        Clicked="Right_buttonPressed"/>
+        <!--Pressed="Right_buttonPressed"
+        Released="ButtonsReleased"/>-->
 
         <Button 
         Grid.Row="3"
@@ -48,6 +54,8 @@
         ImageSource="arrow_down"
         Scale="0.9"
         Background="Transparent"
-        Clicked="Back_button"/>
+        Clicked="Back_buttonPressed"/>
+        <!--Pressed="Back_buttonPressed"
+        Released="ButtonsReleased"/>-->
     </Grid>
 </ContentPage>

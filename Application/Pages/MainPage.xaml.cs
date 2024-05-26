@@ -2,6 +2,7 @@ using Application.Pages;
 using Application.Models;
 using Application.Patterns.Singleton;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace Application.Pages;
 
@@ -41,8 +42,11 @@ public partial class MainPage : ContentPage
     async void onClick(object sender, EventArgs e)
     {
         //await Navigation.PushModalAsync(new ExhibitPage(new Exhibition { Name = "", ExhibitCount = 0, Time = 0 }));
-        var name = await DisplayPromptAsync("Логин", "Введите имя:", "OK", "Отмена");
-        ExhibitionManager.Instance.Items.Add(new Exhibition { Name = name, ExhibitCount = 0, Time = 0});
+        var name = await DisplayPromptAsync("Имя экскурсии", "Введите имя:", "OK", "Отмена");
+        if (name != "" && name != null) 
+        {
+            ExhibitionManager.Instance.Items.Add(new Exhibition { Name = name, ExhibitCount = 0, Time = 0, exhibits = new ObservableCollection<Exhibit> {}});
+        }
     }
 
     public async void ExhibitionsList_ItemTapped(object sender, ItemTappedEventArgs e)

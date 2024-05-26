@@ -107,7 +107,7 @@
             HasUnevenRows="True"
             SelectionMode="None"
             ItemTapped="ExhibitionsList_ItemTapped"
-            MaximumHeightRequest="490">
+            MaximumHeightRequest="420">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

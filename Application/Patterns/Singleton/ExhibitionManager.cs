@@ -19,8 +19,8 @@ namespace Application.Patterns.Singleton
         {
             Items = new ObservableCollection<Exhibition>
             {
-                new Exhibition {Name = "До современности", ExhibitCount = 11, Time = 25},
-                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 5, Time = 10}
+                new Exhibition {Name = "До современности", ExhibitCount = 11, Time = 25, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Мамонт пригорья", Color = "#C3426B", Source = "start.png" }} },
+                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 5, Time = 10, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Человек c костями", Color = "#DC724A", Source = "start.png" } } }
             };
 
             CurrentItem = new ObservableCollection<Exhibition> { };

@@ -1,31 +1,47 @@
 using Application.Models;
+using Application.Patterns.Singleton;
 using Microcharts;
 using SkiaSharp;
 using System.Collections.ObjectModel;
+using System.Net.Sockets;
 
 namespace Application.Pages;
 
 public partial class ExhibitPage : ContentPage
 {
-    public int pressedCount = 0;
+    public int pressedCount = 0; // Кол-во нажатий на кнопку появления / скрытия кнопок управления роботом
+    Exhibition thisExhibition; //Текущая экскурсия
+    List<string> colors = new List<string> { "#c3426b", "#dc724a", "#33986a", "#80c442" }; // Всевозможные цвета экспонатов
+    List<string> images = new List<string> { "start", "one", "two", "three", "four", "five", "six", "seven", "eight" };
+    int currentColourIndex = 100;
+    int currentImageIndex = 1;
+    MyTimer timer = new MyTimer();
+
     public ObservableCollection<Exhibit> Items { get; private set; }
-    public ExhibitPage(Exhibition exhibition)
+    public ExhibitPage(Exhibition exhibition) //Конструктор
     {
+        thisExhibition = exhibition;
         InitializeComponent();
         ExhibitName.Text = exhibition.Name;
-
-        Items = new ObservableCollection<Exhibit>
-            {
-                new Exhibit {Name = "Мамонт пригорья", Color = "#C3426B", Source = "start.png"},
-                new Exhibit { Name = "Человек c костями", Color = "#DC724A", Source = "two.png"},
-                new Exhibit {Name = "Древние инструменты", Color = "#33986A", Source = "three.png"},
-                new Exhibit { Name = "Камни без хозяев", Color = "#80C442", Source = "four.png"}
-            };
-
-        ExhibitsList.ItemsSource = Items;
+        ExhibitsList.ItemsSource = thisExhibition.exhibits;
+        currentColourIndex = getRandomColorIndex(currentColourIndex);
+        AddButton.Background = Microsoft.Maui.Graphics.Color.FromRgba(colors[currentColourIndex]);
     }
 
-    private void ShowHideConroller(object sender, EventArgs e)
+    private int getRandomColorIndex(int previousColour) // возвращает случайный индекс цвета экскурсии, в зависимости от предыдущего
+    {
+        while (true) 
+        {
+            Random rand = new Random();
+            int currentColour = rand.Next(colors.Count);
+            if(previousColour != currentColour)
+            {
+                return currentColour;
+            }
+        }
+    }
+
+    private void ShowHideConroller(object sender, EventArgs e) //Показ и скрытие кнопок управления роботом
     {
         if(pressedCount == 0)
         {
@@ -44,5 +60,54 @@ public partial class ExhibitPage : ContentPage
             pressedCount = 0;
         }
 
+    }
+
+    async private void AddExhibit(object sender, EventArgs e) //Добавление экскурсии
+    {
+        var name = await DisplayPromptAsync("Название экспоната", "Введите название:", "OK", "Отмена");
+        if (name != null && name != "")
+        {
+            if(thisExhibition.exhibits.Count == 0)
+            {
+                currentImageIndex = 0;
+            }
+            else
+            {
+                if(currentImageIndex == 8) 
+                {
+                    currentImageIndex = 1;
+                }
+                else
+                {
+                    currentImageIndex++;
+                }
+            }
+            thisExhibition.exhibits.Add(new Exhibit { Name = name, Color = colors[currentColourIndex], Source = images[currentImageIndex] });
+        }
+        currentColourIndex = getRandomColorIndex(currentColourIndex);
+        AddButton.Background = Microsoft.Maui.Graphics.Color.FromRgba(colors[currentColourIndex]);
+    }
+
+    private void Forward_buttonPressed(object sender, EventArgs e)
+    {
+        timer.Start();
+    }
+    private void Left_buttonPressed(object sender, EventArgs e)
+    {
+        timer.Start();
+    }
+    private void Right_buttonPressed(object sender, EventArgs e)
+    {
+        timer.Start();
+    }
+    private void Back_buttonPressed(object sender, EventArgs e)
+    {
+        timer.Start();
+    }
+
+    private void ButtonsReleased(object sender, EventArgs e)
+    {
+        timer.Stop();
+        ExhibitName.Text = Math.Round(timer.GetElapsedSeconds(), 3).ToString();
     }
 }

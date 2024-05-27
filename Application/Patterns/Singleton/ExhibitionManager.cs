@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,8 @@ namespace Application.Patterns.Singleton
         {
             Items = new ObservableCollection<Exhibition>
             {
-                new Exhibition {Name = "До современности", ExhibitCount = 11, Time = 25, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Мамонт пригорья", Color = "#C3426B", Source = "start.png" }} },
-                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 5, Time = 10, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Человек c костями", Color = "#DC724A", Source = "start.png" } } }
+                new Exhibition {Name = "До современности", ExhibitCount = 11, Time = 25, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Мамонт пригорья", Color = "#C3426B", exhibitRoutes = new ObservableCollection<ExhibitRoute> { } } } },
+                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 5, Time = 10, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Человек c костями", Color = "#DC724A", exhibitRoutes = new ObservableCollection<ExhibitRoute> { } } } }
             };
 
             CurrentItem = new ObservableCollection<Exhibition> { };

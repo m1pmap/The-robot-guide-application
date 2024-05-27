@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Application.Pages.ExhibitRoutePage"
+             BackgroundImageSource="main_background.png">
+    
+    <StackLayout>
+        <Label x:Name="ExhibitName"
+               Text="123"
+                TextColor="White"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontFamily="Impact"
+                FontSize="23"
+                Margin="10">
+        </Label>
+    </StackLayout>
+</ContentPage>

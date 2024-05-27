@@ -9,8 +9,8 @@ namespace Application
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(Pages.Editor), typeof(Pages.Editor));
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute(nameof(Settings), typeof(Settings));
+            Routing.RegisterRoute(nameof(Pages.MainPage), typeof(Pages.MainPage));
+            Routing.RegisterRoute(nameof(Pages.Settings), typeof(Pages.Settings));
             CurrentItem = MainPage;
         }
     }

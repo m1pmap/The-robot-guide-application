@@ -96,7 +96,7 @@
             Source="image1.png" 
             Scale="0.9"
             Margin="5"/>
-        
+
 
         <ListView x:Name="ExhibitionsList"
             SeparatorVisibility="None"

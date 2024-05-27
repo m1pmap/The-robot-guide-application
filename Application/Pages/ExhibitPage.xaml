@@ -41,17 +41,33 @@
                               VerticalScrollBarVisibility = "Never"
                               HasUnevenRows="True"
                               SelectionMode="None"
-                              MaximumHeightRequest="244">
+                              MaximumHeightRequest="244"
+                              ItemTapped="ExhibitList_ItemTapped">
                         <ListView.ItemTemplate>
-                            
+
                             <DataTemplate>
                                 <ViewCell>
                                     <SwipeView>
+                                        <SwipeView.RightItems>
+                                            <SwipeItemView>
+                                                <Button
+                                                    Text="УДАЛИТЬ"
+                                                    FontSize="15"
+                                                    VerticalOptions="Center"
+                                                    BackgroundColor="{Binding Color}"
+                                                    FontFamily="Impact"
+                                                    Scale="0.9"
+                                                    Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference Name=ExhibitsList}}"
+                                                    CommandParameter="{Binding .}">
+
+                                                </Button>
+                                            </SwipeItemView>
+                                        </SwipeView.RightItems>
                                         <Border
                                             Grid.Column="0"
                                             Grid.Row="0"
                                             StrokeShape="RoundRectangle 10"
-                                            Margin="10"
+                                            Margin="5"
                                             StrokeThickness="0"
                                             BackgroundColor="{Binding Color}">
                                             <Grid ColumnDefinitions="0.8*, 0.2*">
@@ -63,18 +79,18 @@
                                                     TextColor="White"
                                                     FontFamily="Impact"
                                                     FontSize="20"
-                                                    Margin="15, 5"/>                
-                                                <Image
+                                                    Margin="15, 5"/>
+                                                <!--<Image
                                                     Grid.Column="1"
                                                     Scale="1.1"
                                                     Margin="0, 0, 10, -2"
                                                     Source="{Binding Source}"
                                                     >
-                                                </Image>
+                                                </Image>-->
                                             </Grid>
                                         </Border>
                                     </SwipeView>
-                                    
+
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

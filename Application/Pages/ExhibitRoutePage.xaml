@@ -14,5 +14,68 @@
                 FontSize="23"
                 Margin="10">
         </Label>
+
+        <Border
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            StrokeShape="RoundRectangle 15"
+            Margin="20"
+            Padding="5"
+            StrokeThickness="-2"
+            BackgroundColor="White">
+            <VerticalStackLayout HeightRequest="1000">
+                <ListView x:Name="ExhibitRouteList"
+                  SeparatorVisibility="None"
+                  VerticalScrollBarVisibility = "Never"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  MaximumHeightRequest="570">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                    x:Name="ExhibitRouteBorder"
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    StrokeShape="RoundRectangle 10"
+                                    Margin="5"
+                                    StrokeThickness="0"
+                                    BackgroundColor="{Binding color}">
+                                    <Grid ColumnDefinitions="0.1*, 0.8*, 0.2*">
+                                        <Image
+                                            Grid.Column="0"
+                                            Source="{Binding source}"
+                                            Scale="1.5"
+                                            Margin="10, 0, 0, 0">
+                                        </Image>
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding elapsedSeconds}"
+                                            TextColor="White"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            FontFamily="Impact"
+                                            FontSize="23"
+                                            Margin="0, 10, 0, 10">
+                                        </Label>
+                                        <Label
+                                            Grid.Column="2"
+                                            Text=" sec"
+                                            TextColor="White"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            FontFamily="Impact"
+                                            FontSize="23">
+                                        </Label>
+                                    </Grid>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Border>
     </StackLayout>
 </ContentPage>

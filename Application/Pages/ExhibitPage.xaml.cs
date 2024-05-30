@@ -20,7 +20,7 @@ public partial class ExhibitPage : ContentPage
     int currentColourIndex = 100;
     int currentImageIndex = 1;
     MyTimer timer = new MyTimer();
-
+    ObservableCollection<ExhibitRoute> routes = new ObservableCollection<ExhibitRoute> { };
     public ICommand DeleteItemCommand { get; set; }
 
     public ObservableCollection<Exhibit> Items { get; private set; }
@@ -75,25 +75,20 @@ public partial class ExhibitPage : ContentPage
 
     async private void AddExhibit(object sender, EventArgs e) //Добавление экскурсии
     {
+        double exhibitTime = 0;
         var name = await DisplayPromptAsync("Название экспоната", "Введите название:", "OK", "Отмена");
-        if (name != null && name != "")
+        if (name != null && name != "" && routes.Count != 0)
         {
-            if (thisExhibition.exhibits.Count == 0)
+            ObservableCollection<ExhibitRoute> newExhibitRoutes = new ObservableCollection<ExhibitRoute> { };
+            for(int i = 0; i < routes.Count; i++)
             {
-                currentImageIndex = 0;
+                newExhibitRoutes.Add(routes[i]);
+                exhibitTime += routes[i].elapsedSeconds;
             }
-            else
-            {
-                if (currentImageIndex == 8)
-                {
-                    currentImageIndex = 1;
-                }
-                else
-                {
-                    currentImageIndex++;
-                }
-            }
-            thisExhibition.exhibits.Add(new Exhibit { Name = name, Color = colors[currentColourIndex] });
+            thisExhibition.exhibits.Add(new Exhibit { Name = name, Color = colors[currentColourIndex], exhibitRoutes = newExhibitRoutes});
+            routes.Clear();
+            thisExhibition.ExhibitCount++;
+            thisExhibition.Time += Math.Round(exhibitTime / 60, 2);
         }
         currentColourIndex = getRandomColorIndex(currentColourIndex);
         AddButton.Background = Microsoft.Maui.Graphics.Color.FromRgba(colors[currentColourIndex]);
@@ -102,29 +97,34 @@ public partial class ExhibitPage : ContentPage
     private void Forward_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
+        routes.Add(new ExhibitRoute { Route = '1', source = "up", color = colors[currentColourIndex]});
     }
     private void Left_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
+        routes.Add(new ExhibitRoute { Route = '3', source = "left", color = colors[currentColourIndex] });
     }
     private void Right_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
+        routes.Add(new ExhibitRoute { Route = '4', source = "right", color = colors[currentColourIndex] });
     }
     private void Back_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
+        routes.Add(new ExhibitRoute { Route = '2', source = "down", color = colors[currentColourIndex] });
     }
 
     private void ButtonsReleased(object sender, EventArgs e)
     {
         timer.Stop();
-        ExhibitName.Text = Math.Round(timer.GetElapsedSeconds(), 3).ToString();
+        routes[routes.Count - 1].elapsedSeconds = Math.Round(timer.GetElapsedSeconds(), 3);
     }
 
     private void DeleteItem(Exhibit exhibit)
     {
         thisExhibition.exhibits.Remove(exhibit);
+        thisExhibition.ExhibitCount--;
     }
 
     public async void ExhibitList_ItemTapped(object sender, ItemTappedEventArgs e)

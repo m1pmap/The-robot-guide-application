@@ -5,10 +5,10 @@
              BackgroundImageSource="main_background.png">
 
     <Grid 
-    RowDefinitions="Auto, Auto, Auto, Auto"
+    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
     ColumnDefinitions=".3*, .5*">
         <ActivityIndicator Color="White" 
-            Grid.Row="3" Grid.ColumnSpan="2"
+            Grid.Row="4" Grid.ColumnSpan="2"
             x:Name="activityIndicator" IsRunning="False" />
         <Border
         Grid.Row="0"
@@ -45,17 +45,31 @@
         </Button>
 
         <Button 
-        Grid.Row="2"
-        Grid.ColumnSpan="2"
-        CornerRadius="15"
-        Margin="20, 0, 20, 5"
-        Background="White"
-        Text="ПОДКЛЮЧЕНИЕ"
-        TextColor="#0d4853"
-        FontFamily="Impact"
-        FontSize="28"
-        Padding="5"
-        Clicked="Connection_button"/>
+            x:Name="start"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            CornerRadius="15"
+            Margin="20, 0, 20, 20"
+            Background="White"
+            Text="ЗАПУСТИТЬ ЭКСКУРСИЮ"
+            TextColor="#0d4853"
+            FontFamily="Impact"
+            FontSize="28"
+            Padding="5"
+            Clicked="StartExhibition"/>
+
+        <Button 
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            CornerRadius="15"
+            Margin="20, 0, 20, 10"
+            Background="White"
+            Text="ПОДКЛЮЧЕНИЕ"
+            TextColor="#0d4853"
+            FontFamily="Impact"
+            FontSize="28"
+            Padding="5"
+            Clicked="Connection_button"/>
     </Grid>
 
 </ContentPage>

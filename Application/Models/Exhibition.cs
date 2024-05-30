@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Database;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Application.Models
     {
         public string Name { get; set; }
         public int ExhibitCount { get; set; }
-        public int Time { get; set; }
+        public double Time { get; set; }
         public ObservableCollection<Exhibit> exhibits { get; set; }
     }
 }

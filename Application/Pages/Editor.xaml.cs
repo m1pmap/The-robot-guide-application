@@ -10,6 +10,7 @@ using System.Security.AccessControl;
 using Android.Bluetooth;
 using Java.Util;
 using Application.Pages.SimplePages;
+using System.Threading;
 
 namespace Application.Pages;
 
@@ -64,5 +65,19 @@ public partial class Editor : ContentPage
     private async void Controlling_button(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new ControllingPage(_socket));
+    }
+
+    private void StartExhibition(object sender, EventArgs e)
+    {
+        Exhibition currentExhibition = ExhibitionManager.Instance.CurrentItem[0];
+        for (int i = 0; i < currentExhibition.exhibits.Count; i++)
+        {
+            for (int j = 0; j < currentExhibition.exhibits[i].exhibitRoutes.Count; j++)
+            {
+                double routeSeconds = currentExhibition.exhibits[i].exhibitRoutes[j].elapsedSeconds;
+                start.Text = currentExhibition.exhibits[i].exhibitRoutes[j].Route.ToString();
+                Thread.Sleep(Convert.ToInt32(routeSeconds * 1000));
+            }
+        }
     }
 }

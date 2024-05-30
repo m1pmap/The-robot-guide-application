@@ -20,8 +20,8 @@ namespace Application.Patterns.Singleton
         {
             Items = new ObservableCollection<Exhibition>
             {
-                new Exhibition {Name = "До современности", ExhibitCount = 11, Time = 25, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Мамонт пригорья", Color = "#C3426B", exhibitRoutes = new ObservableCollection<ExhibitRoute> { } } } },
-                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 5, Time = 10, exhibits = new ObservableCollection<Exhibit> { new Exhibit { Name = "Человек c костями", Color = "#DC724A", exhibitRoutes = new ObservableCollection<ExhibitRoute> { } } } }
+                new Exhibition {Name = "До современности", ExhibitCount = 0, Time = 0, exhibits = new ObservableCollection<Exhibit> { } },
+                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 0, Time = 0, exhibits = new ObservableCollection<Exhibit> { } }
             };
 
             CurrentItem = new ObservableCollection<Exhibition> { };

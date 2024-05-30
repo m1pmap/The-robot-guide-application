@@ -11,5 +11,6 @@ namespace Application.Models
         public char Route { get; set; }
         public string source {  get; set; }
         public double elapsedSeconds { get; set; }
+        public string color { get; set; }
     }
 }

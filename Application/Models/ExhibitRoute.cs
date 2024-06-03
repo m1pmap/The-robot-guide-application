@@ -8,7 +8,7 @@ namespace Application.Models
 {
     public class ExhibitRoute
     {
-        public char Route { get; set; }
+        public string Route { get; set; }
         public string source {  get; set; }
         public double elapsedSeconds { get; set; }
         public string color { get; set; }

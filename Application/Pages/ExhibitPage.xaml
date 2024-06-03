@@ -7,23 +7,18 @@
 
 
     <StackLayout>
-        <Label x:Name="ExhibitName"
-            TextColor="White"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
-            FontFamily="Impact"
-            FontSize="23"
-            Margin="10">
-        </Label>
-
-        <Button 
-            Text="ВЫБРАТЬ ГОЛОС"
-            FontFamily="Impact"
-            CornerRadius="15"
-            Margin="20, 0"
-            FontSize="20"
-            TextColor="#0d4853"
-            BackgroundColor="White"/>
+        <Grid ColumnDefinitions="0.3*, 0.3*, 0.3*">
+            <Label x:Name="ExhibitName"
+                   Grid.Column="1"
+                TextColor="White"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontFamily="Impact"
+                FontSize="23"
+                Margin="10">
+            </Label>
+        </Grid>
+        
 
         <Grid RowDefinitions="Auto, Auto"
               ColumnDefinitions=".5*, .2*">
@@ -59,7 +54,6 @@
                                                     Scale="0.9"
                                                     Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference Name=ExhibitsList}}"
                                                     CommandParameter="{Binding .}">
-
                                                 </Button>
                                             </SwipeItemView>
                                         </SwipeView.RightItems>
@@ -106,7 +100,7 @@
                 BackgroundColor="White">
                 <VerticalStackLayout HeightRequest="75">
                     <Button
-                        Text="В ПУТЬ"
+                        Text="ЗАДАТЬ МАРШРУТ"
                         FontFamily="Impact"
                         FontSize="20"
                         Margin="15, 12"

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,5 +13,6 @@ namespace Application.Models
         public string Name { get; set; }
         public string Color { get; set; }
         public ObservableCollection<ExhibitRoute> exhibitRoutes { get; set; }
+        public string fileName { get; set; }
     }
 }

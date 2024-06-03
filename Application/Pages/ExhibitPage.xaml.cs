@@ -8,6 +8,9 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Controls.Xaml;
 using System.Windows.Input;
+using Android.Bluetooth;
+using Java.Net;
+using System.Text;
 
 namespace Application.Pages;
 
@@ -85,7 +88,7 @@ public partial class ExhibitPage : ContentPage
                 newExhibitRoutes.Add(routes[i]);
                 exhibitTime += routes[i].elapsedSeconds;
             }
-            thisExhibition.exhibits.Add(new Exhibit { Name = name, Color = colors[currentColourIndex], exhibitRoutes = newExhibitRoutes});
+            thisExhibition.exhibits.Add(new Exhibit { Name = name, Color = colors[currentColourIndex], exhibitRoutes = newExhibitRoutes, fileName = ""});
             routes.Clear();
             thisExhibition.ExhibitCount++;
             thisExhibition.Time += Math.Round(exhibitTime / 60, 2);
@@ -97,28 +100,37 @@ public partial class ExhibitPage : ContentPage
     private void Forward_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
-        routes.Add(new ExhibitRoute { Route = '1', source = "up", color = colors[currentColourIndex]});
+        routes.Add(new ExhibitRoute { Route = "1", source = "up", color = colors[currentColourIndex]});
+        SendData("1");
     }
     private void Left_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
-        routes.Add(new ExhibitRoute { Route = '3', source = "left", color = colors[currentColourIndex] });
+        routes.Add(new ExhibitRoute { Route = "3", source = "left", color = colors[currentColourIndex] });
+        SendData("3");
     }
     private void Right_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
-        routes.Add(new ExhibitRoute { Route = '4', source = "right", color = colors[currentColourIndex] });
+        routes.Add(new ExhibitRoute { Route = "4", source = "right", color = colors[currentColourIndex] });
+        SendData("4");
     }
     private void Back_buttonPressed(object sender, EventArgs e)
     {
         timer.Start();
-        routes.Add(new ExhibitRoute { Route = '2', source = "down", color = colors[currentColourIndex] });
+        routes.Add(new ExhibitRoute { Route = "2", source = "down", color = colors[currentColourIndex] });
+        SendData("2");
     }
 
     private void ButtonsReleased(object sender, EventArgs e)
     {
         timer.Stop();
-        routes[routes.Count - 1].elapsedSeconds = Math.Round(timer.GetElapsedSeconds(), 3);
+        double elapsedSeconds = Math.Round(timer.GetElapsedSeconds(), 3);
+        if (elapsedSeconds > 0)
+        {
+            routes[routes.Count - 1].elapsedSeconds = elapsedSeconds;
+        }
+        SendData("5");
     }
 
     private void DeleteItem(Exhibit exhibit)
@@ -132,6 +144,19 @@ public partial class ExhibitPage : ContentPage
         if (e.Item is Exhibit tappedExhibit)
         {
             await Navigation.PushModalAsync(new ExhibitRoutePage(tappedExhibit));
+        }
+    }
+    private async void SendData(string message)
+    {
+        try
+        {
+            message += "\n";
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+        }
+        catch
+        {
+            await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
         }
     }
 }

@@ -4,5 +4,24 @@
              x:Class="Application.Pages.Settings"
              BackgroundImageSource="main_background.png">
     <VerticalStackLayout>
+        <Button
+            Text="СОХРАНИТЬ ДАННЫЕ"
+            FontFamily="Impact"
+            CornerRadius="15"
+            Margin="20, 5"
+            FontSize="20"
+            TextColor="#0d4853"
+            BackgroundColor="White"
+            Clicked="SaveData"/>
+
+        <Button
+            Text="ЗАГРУЗИТЬ ДАННЫЕ"
+            FontFamily="Impact"
+            CornerRadius="15"
+            Margin="20, 5"
+            FontSize="20"
+            TextColor="#0d4853"
+            BackgroundColor="White"
+            Clicked="LoadData"/>
     </VerticalStackLayout>
 </ContentPage>

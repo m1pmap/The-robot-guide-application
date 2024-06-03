@@ -1,12 +1,12 @@
 using Android.Bluetooth;
-using Org.W3c.Dom;
+using Application.Patterns.Singleton;
+using System.Text;
 
 namespace Application.Pages.SimplePages;
 
 public partial class ControllingPage : ContentPage
 {
     BluetoothSocket socket;
-    byte[] buffer = new byte[1];
 
     public ControllingPage(BluetoothSocket _socket)
     {
@@ -15,36 +15,37 @@ public partial class ControllingPage : ContentPage
     }
     private void Forward_buttonPressed(object sender, EventArgs e)
     {
-        SendData('1', socket);
+        SendData("1");
     }
 
     private void Back_buttonPressed(object sender, EventArgs e)
     {
-        SendData('2', socket);
+        SendData("2");
     }
 
     private void Left_buttonPressed(object sender, EventArgs e)
     {
-        SendData('3', socket);
+        SendData("3");
     }
 
     private void Right_buttonPressed(object sender, EventArgs e)
     {
-        SendData('4', socket);
+        SendData("4");
     }
 
     private void ButtonsReleased(object sender, EventArgs e)
     {
-        SendData('5', socket);
+        SendData("5");
     }
 
 
-    private async void SendData(char data, BluetoothSocket socket)
+    private async void SendData(string message)
     {
         try
         {
-            buffer[0] = (byte)data;
-            await socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+            message += "\n";
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
         }
         catch
         {

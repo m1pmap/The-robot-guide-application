@@ -15,11 +15,31 @@
                 Margin="10">
         </Label>
 
+        <Button
+            Text="ВЫБРАТЬ ФАЙЛ ОЗВУЧКИ"
+            FontFamily="Impact"
+            CornerRadius="15"
+            Margin="20, 0"
+            FontSize="20"
+            TextColor="#0d4853"
+            BackgroundColor="White"
+            Clicked="AddFileName"/>
+        
+        <Label x:Name="FileName"
+                Text="Имя файла: "
+                TextColor="White"
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Center"
+                FontFamily="Impact"
+                FontSize="17"
+               Margin="27,10,27,0">
+        </Label>
+
         <Border
             Grid.Row="0"
             Grid.ColumnSpan="2"
             StrokeShape="RoundRectangle 15"
-            Margin="20"
+            Margin="20, 0, 20, 20"
             Padding="5"
             StrokeThickness="-2"
             BackgroundColor="White">

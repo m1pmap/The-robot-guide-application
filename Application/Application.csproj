@@ -98,4 +98,8 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="JSON\" />
+	</ItemGroup>
+
 </Project>

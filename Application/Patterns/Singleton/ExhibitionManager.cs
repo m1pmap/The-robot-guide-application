@@ -1,4 +1,5 @@
-﻿using Application.Models;
+﻿using Android.Bluetooth;
+using Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,15 +14,15 @@ namespace Application.Patterns.Singleton
     {
         private static ExhibitionManager instance;
 
-        public ObservableCollection<Exhibition> Items { get; private set; }
-        public ObservableCollection<Exhibition> CurrentItem { get; private set; }
+        public ObservableCollection<Exhibition> Items { get; set; }
+        public ObservableCollection<Exhibition> CurrentItem { get; set; }
+
+        public BluetoothSocket socket;
 
         private ExhibitionManager()
         {
             Items = new ObservableCollection<Exhibition>
             {
-                new Exhibition {Name = "До современности", ExhibitCount = 0, Time = 0, exhibits = new ObservableCollection<Exhibit> { } },
-                new Exhibition {Name = "Исторический музей в Москве", ExhibitCount = 0, Time = 0, exhibits = new ObservableCollection<Exhibit> { } }
             };
 
             CurrentItem = new ObservableCollection<Exhibition> { };

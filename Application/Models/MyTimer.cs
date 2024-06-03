@@ -7,7 +7,7 @@ namespace Application.Models
     {
         private System.Timers.Timer timer; 
         private DateTime startTime;
-        private TimeSpan elapsedTime;
+        public TimeSpan elapsedTime;
 
         public MyTimer()
         {

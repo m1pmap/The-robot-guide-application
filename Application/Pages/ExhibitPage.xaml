@@ -7,16 +7,32 @@
 
 
     <StackLayout>
-        <Grid ColumnDefinitions="0.3*, 0.3*, 0.3*">
-            <Label x:Name="ExhibitName"
+        <Grid ColumnDefinitions="0.3*, 0.8*, 0.3*">
+            <Button 
+                Grid.Column="0"
+                ImageSource="edit"
+                Scale="0.65"
+                VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                Clicked="EditButton">
+            </Button>
+            <Label x:Name="ExhibitionName"
                    Grid.Column="1"
-                TextColor="White"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                FontFamily="Impact"
-                FontSize="23"
-                Margin="10">
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="Center"
+                    FontFamily="Impact"
+                    FontSize="23">
             </Label>
+            <Button 
+                Grid.Column="2"
+                ImageSource="delete"
+                Scale="0.65"
+                VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                Clicked="DeleteExhibition">
+            </Button>
         </Grid>
         
 
@@ -74,17 +90,9 @@
                                                     FontFamily="Impact"
                                                     FontSize="20"
                                                     Margin="15, 5"/>
-                                                <!--<Image
-                                                    Grid.Column="1"
-                                                    Scale="1.1"
-                                                    Margin="0, 0, 10, -2"
-                                                    Source="{Binding Source}"
-                                                    >
-                                                </Image>-->
                                             </Grid>
                                         </Border>
                                     </SwipeView>
-
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

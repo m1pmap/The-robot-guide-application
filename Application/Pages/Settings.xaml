@@ -3,25 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Application.Pages.Settings"
              BackgroundImageSource="main_background.png">
-    <VerticalStackLayout>
-        <Button
-            Text="СОХРАНИТЬ ДАННЫЕ"
-            FontFamily="Impact"
+    <Grid RowDefinitions="Auto, Auto">
+        <Label x:Name="SpeedLabel"
+               Text="Скорость робота: 70"
+               HorizontalOptions="Center"
+               FontSize="26"
+               FontFamily="Impact"
+               TextColor="White"
+               Margin="20, 10">
+        </Label>
+        <Button 
+            x:Name="EditSpeed"
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
             CornerRadius="15"
-            Margin="20, 5"
-            FontSize="20"
+            Margin="20, 0, 20, 20"
+            Background="White"
+            Text="ИЗМЕНИТЬ СКОРОСТЬ"
             TextColor="#0d4853"
-            BackgroundColor="White"
-            Clicked="SaveData"/>
-
-        <Button
-            Text="ЗАГРУЗИТЬ ДАННЫЕ"
             FontFamily="Impact"
-            CornerRadius="15"
-            Margin="20, 5"
-            FontSize="20"
-            TextColor="#0d4853"
-            BackgroundColor="White"
-            Clicked="LoadData"/>
-    </VerticalStackLayout>
+            FontSize="28"
+            Padding="5"
+            Clicked="EditSpeed_Clicked"/>  
+    </Grid>
 </ContentPage>

@@ -4,65 +4,48 @@ using Application.Models;
 using Application.Patterns.Singleton;
 using Microsoft.Maui.Storage;
 using System.Collections.ObjectModel;
+using System.Text;
 using System.Text.Json;
 
 public partial class Settings : ContentPage
 {
-    private string exhibitionsFilePath;
-    private string currentExhibitionFilePath;
+    private const string PlaceholderText = "Введите значение скорости";
 
     public Settings()
     {
         InitializeComponent();
-        exhibitionsFilePath = Path.Combine(FileSystem.AppDataDirectory, "exhibition.json");
-        currentExhibitionFilePath = Path.Combine(FileSystem.AppDataDirectory, "currentExhibition.json");
     }
 
-    private void SaveData(object sender, EventArgs e)
+    private async void EditSpeed_Clicked(object sender, EventArgs e)
     {
-        var jsonexhibitionsString = JsonSerializer.Serialize(ExhibitionManager.Instance.Items);
-        File.WriteAllText(exhibitionsFilePath, jsonexhibitionsString);
-        var jsonCurrentExhibitionString = JsonSerializer.Serialize(ExhibitionManager.Instance.CurrentItem);
-        File.WriteAllText(currentExhibitionFilePath, jsonCurrentExhibitionString);
-        DisplayAlert("Сохранено", "Данные сохранены", "OK");
+        var name = await DisplayPromptAsync("Скорость робота", "Введите скорость:", "OK", "Отмена");
+        if (name != "" && name != null)
+        {
+            if(Convert.ToInt32(name) > 255) 
+            {
+                name = "255";
+            }
+            if (Convert.ToInt32(name) < 70)
+            {
+                name = "70";
+            }
+            SendData(name);
+            SpeedLabel.Text = "Скорость робота: " + name;
+        }
     }
 
-    private void LoadData(object sender, EventArgs e) 
+    private async void SendData(string message)
     {
-        if (File.Exists(exhibitionsFilePath)) //загрузка неактивных экскурсий
+        try
         {
-            ExhibitionManager.Instance.Items.Clear();
-            var jsonString = File.ReadAllText(exhibitionsFilePath);
-            var exhibitions = JsonSerializer.Deserialize<ObservableCollection<Exhibition>>(jsonString);
-
-            string message = "";
-            
-            foreach (var exhibition in exhibitions)
-            {
-                ExhibitionManager.Instance.Items.Add(exhibition);
-                DisplayAlert("Загружено", $"Название загруженной экскурсии: {exhibition.Name}", "OK");
-            }
+            message += "\n";
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
         }
-        else
+        catch
         {
-            DisplayAlert("Ошибка", "Файл с данными экскурсии не найден", "OK");
-        }
+            await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
 
-        if (File.Exists(currentExhibitionFilePath)) //загрузка текущей экскурсии
-        {
-            ExhibitionManager.Instance.CurrentItem.Clear();
-            var jsonString = File.ReadAllText(currentExhibitionFilePath);
-            var exhibitions = JsonSerializer.Deserialize<ObservableCollection<Exhibition>>(jsonString);
-
-            foreach (var exhibition in exhibitions)
-            {
-                ExhibitionManager.Instance.Items.Add(exhibition);
-                DisplayAlert("Загружено", $"Название загруженной экскурсии: {exhibition.Name}", "OK");
-            }
-        }
-        else
-        {
-            DisplayAlert("Ошибка", "Файл с данными выставки не найден", "OK");
         }
     }
 }

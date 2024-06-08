@@ -5,10 +5,10 @@
              BackgroundImageSource="main_background.png">
 
     <Grid 
-    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-    ColumnDefinitions=".3*, .5*">
+    RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+    ColumnDefinitions=".35*, .5*">
         <ActivityIndicator Color="White" 
-            Grid.Row="4" Grid.ColumnSpan="2"
+            Grid.Row="5" Grid.ColumnSpan="2"
             x:Name="activityIndicator" IsRunning="False" />
         <Border
         Grid.Row="0"
@@ -16,23 +16,12 @@
         StrokeShape="RoundRectangle 15"
         Background="White"
         StrokeThickness="0"
-        Margin="20, 20, 0, 20"
-        Padding="0">
-            <Grid RowDefinitions="auto, auto">
-                <Image
-                Grid.Row="0"
-                Source="battery.png"/>
-                <Label x:Name="battery"
-                Grid.Row="0"
-                Text="105%" 
-                FontAttributes="Bold" 
-                TextColor="#0d4853"
-                FontSize="30"
-                FontFamily="Impact" 
-                HorizontalOptions="End"
-                VerticalOptions="End"
-                Margin="15, 5"/>
-            </Grid>
+        Margin="20, 20, 0, 20">
+            <Image
+                Source="logo"
+                Scale="0.9"
+                Margin="0">
+            </Image>
         </Border>
         <Button
             Margin="20"
@@ -59,7 +48,21 @@
             Clicked="StartExhibition"/>
 
         <Button 
+            x:Name="cancel"
             Grid.Row="3"
+            Grid.ColumnSpan="3"
+            CornerRadius="15"
+            Margin="20, 0, 20, 20"
+            Background="White"
+            Text="ОТМЕНИТЬ ЭКСКУРСИЮ"
+            TextColor="#0d4853"
+            FontFamily="Impact"
+            FontSize="28"
+            Padding="5"
+            Clicked="cancel_Clicked"/>
+
+        <Button 
+            Grid.Row="4"
             Grid.ColumnSpan="2"
             CornerRadius="15"
             Margin="20, 0, 20, 10"

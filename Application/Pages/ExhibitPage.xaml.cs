@@ -19,7 +19,6 @@ public partial class ExhibitPage : ContentPage
     public int pressedCount = 0; // Кол-во нажатий на кнопку появления / скрытия кнопок управления роботом
     Exhibition thisExhibition; //Текущая экскурсия
     List<string> colors = new List<string> { "#c3426b", "#dc724a", "#33986a", "#80c442" }; // Всевозможные цвета экспонатов
-    List<string> images = new List<string> { "start", "one", "two", "three", "four", "five", "six", "seven", "eight" };
     int currentColourIndex = 100;
     int currentImageIndex = 1;
     MyTimer timer = new MyTimer();
@@ -33,7 +32,7 @@ public partial class ExhibitPage : ContentPage
         InitializeComponent();
 
         thisExhibition = exhibition;
-        ExhibitName.Text = exhibition.Name;
+        ExhibitionName.Text = exhibition.Name;
 
         ExhibitsList.ItemsSource = thisExhibition.exhibits;
         currentColourIndex = getRandomColorIndex(currentColourIndex);
@@ -157,6 +156,36 @@ public partial class ExhibitPage : ContentPage
         catch
         {
             await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
+        }
+    }
+
+    private async void EditButton(object sender, EventArgs e)
+    {
+        var name = await DisplayPromptAsync("Новое название экскурсии", "Введите название:", "OK", "Отмена");
+        if (name != null && name != "")
+        {
+            thisExhibition.Name = name;
+            ExhibitionName.Text = name;
+            ObservableCollection<Exhibition> exhibitions = new ObservableCollection<Exhibition>();
+            foreach (Exhibition exhibition in ExhibitionManager.Instance.Items)
+            {
+                exhibitions.Add(exhibition);
+            }
+            ExhibitionManager.Instance.Items.Clear();
+            foreach (Exhibition exhibition in exhibitions)
+            {
+                ExhibitionManager.Instance.Items.Add(exhibition);
+            }
+        }
+    }
+
+    private async void DeleteExhibition(object sender, EventArgs e)
+    {
+        bool result = await DisplayAlert("Подтверждение", "Вы уверены, что хотите продолжить?", "OK", "Отмена");
+        if (result)
+        {
+            ExhibitionManager.Instance.Items.Remove(thisExhibition);
+            await Navigation.PopModalAsync();
         }
     }
 }

@@ -89,14 +89,13 @@ public partial class Editor : ContentPage
                     Thread.Sleep(500);
                 }
                 SendData(currentExhibition.exhibits[i].fileName);
-                start.Text = currentExhibition.exhibits[i].fileName;
                 while(true)
                 {
                     byte[] buffer = new byte[1];
                     int bytesRead = await ExhibitionManager.Instance.socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
                     char receivedChar = (char)buffer[0];
-                    str += receivedChar;
-                    if(str == "STOP")
+                    str = receivedChar.ToString();
+                    if(str == "S")
                     {
                         break;
                     }
@@ -126,5 +125,10 @@ public partial class Editor : ContentPage
             await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
             
         }
+    }
+
+    private void cancel_Clicked(object sender, EventArgs e)
+    {
+        SendData("C");
     }
 }
